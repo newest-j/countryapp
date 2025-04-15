@@ -15,10 +15,67 @@
         <h2 class="text-center mb-4">Country Information</h2>
 
 
+
         <!-- my search and input bar -->
         <div class="mb-4 d-flex justify-content-center">
             <input style="width: 400px;" id="input" type="text" class="form-control me-2" placeholder="Enter a country name">
             <button class="btn btn-primary" id="search">Search</button>
+
+
+            <select id="continentSelect" class="ms-4">
+                <option value="">Choose  a continent </option>
+                <option value="Africa">Africa</option>
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europe</option>
+                <option value="North America">North America</option>
+                <option value="South America">South America</option>
+                <option value="Oceania">Oceania</option>
+                <option value="Antarctica">Antarctica</option>
+              </select>
+              <button id="continentsearch">Search</button>
+            
+
+        </div>
+
+
+        <div class="mb-3  d-flex justify-content-center" id="defaultcountry">
+
+            <div id="body" class="card shadow-sm p-4">
+                <div class="d-flex align-items-center mb-4">
+                    <img id="flag" src="" alt="Flag of Nigeria" class="flag me-3">
+                    <img id="coatofarm" src="" alt="Coat of Arms"
+                        class="coat">
+                </div>
+               
+    
+                <!-- Geography -->
+                <p><strong>Region:</strong><span id="continent"></span></p>
+                <p><strong>Subregion:</strong> <span id="partofcontinent"></span></p>
+                <p><strong>Capital:</strong><span id="capital"></span></p>
+                
+    
+                
+                <!-- Population & Demographics -->
+                <p><strong>Population:</strong><span id="population"></span></p>
+    
+                <!-- Languages -->
+                <p><strong>Languages:</strong><span id="lang"></span></p>
+    
+                <!-- Currency -->
+                <p><strong>Currency:</strong> <span id="currency"></span></p>
+    
+               
+    
+                <!-- Maps -->
+                <p>
+                    <strong>Map Links:</strong>
+                    <a id="googlemap" target="_blank" href="" target="_blank">Maps</a> |
+                    <a id="openstreetmap" target="_blank" href=""
+                        target="_blank">OpenStreetMap</a>
+               </p>
+               
+            </div>
+            
         </div>
 
         <!-- Flag and Coat of Arms -->

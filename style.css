@@ -8,10 +8,21 @@
   }
 
   body {
-    background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80'); /* Change this URL to any image you prefer */
+    background-image: linear-gradient(to right, #43cea2, #185a9d);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#results {
+  margin-top: 20px;
+}
+.country-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  max-width: 400px;
 }
