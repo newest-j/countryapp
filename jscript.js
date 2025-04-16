@@ -79,7 +79,7 @@ continentBtn.addEventListener("click", async () => {
 
   const countries = await fetchCountriesByContinent(selected);
 
-  // Clear previous results
+  
   
 
   countries.forEach((country) => {
@@ -89,10 +89,10 @@ continentBtn.addEventListener("click", async () => {
     card.innerHTML = `
         <div class="card shadow-sm p-4 ">
          <div class="d-flex justify-content-center mb-4">
+        <img src="${country.flags.png}" alt="flag" class="me-3" style="height: 80px;">
        <img src="${country.coatOfArms.png || ''}" alt="Coat of Arms" style="height: 80px;">
       </div>
       <h3>${country.name.official}</h3>
-    <p><strong>Alt Spellings:</strong> ${country.altSpellings.join(', ')}</p>
      <p><strong>Region:</strong> ${country.continents}</p>
      <p><strong>Subregion:</strong> ${country.subregion}</p>
     <p><strong>Capital:</strong> ${country.capital}</p>
@@ -110,11 +110,17 @@ continentBtn.addEventListener("click", async () => {
     `;
 
     document.getElementById("card-container").appendChild(card);
+
   });
 
-
+  // Clear previous results
   byContinent.value ="";
 });
+
+
+document.getElementById("clearinfo").addEventListener('click',()=>{
+  document.getElementById("card-container").innerHTML = "";
+})
 
 // filter ends
 
@@ -263,7 +269,6 @@ searchBtn.addEventListener('click', async () => {
             <img src="${matchedCountry.coatOfArms.png || ''}" alt="Coat of Arms" style="height: 80px;">
           </div>
           <h3>${matchedCountry.name.official}</h3>
-          <p><strong>Alt Spellings:</strong> ${matchedCountry.altSpellings.join(', ')}</p>
           <p><strong>Region:</strong> ${matchedCountry.continents}</p>
           <p><strong>Subregion:</strong> ${matchedCountry.subregion}</p>
           <p><strong>Capital:</strong> ${matchedCountry.capital}</p>
