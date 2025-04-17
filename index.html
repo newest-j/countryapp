@@ -11,16 +11,17 @@
 
 <body>
 
-    <div class="container py-5">
+    <div class="container-fluid py-5 ">
         <h2 class="text-center mb-4">Country Information</h2>
 
 
 
         <!-- my search and input bar -->
-        <div class="mb-4 d-flex flex-wrap justify-content-center">
-            <input style="width: 400px;" id="input" type="text" class="form-control me-2" placeholder="Enter a country name">
+        <div class="mb-4 d-flex flex-wrap justify-content-center ">
+            <input style="width: 400px;" id="input" type="text" class="form-control me-2" placeholder="Enter a country name" >
+            <ul id="suggestions" class="list-group position-absolute w-50  mt-5" style="z-index: 1;"></ul>
             <button class="btn btn-primary mt-2" id="search">Search</button>
-
+            
             <select id="continentSelect" class="ms-4 mt-2">
                 <option value="">Choose  a continent </option>
                 <option value="Africa">Africa</option>
@@ -38,10 +39,11 @@
         </div>
 
 
-        <div class="mb-3  d-flex justify-content-center" id="defaultcountry">
+        <div class="container d-flex justify-content-center">
+        <div class=" col-md-8  mb-3 text-center" id="defaultcountry">
             <div id="body" class="card shadow-sm p-4">
                 <h2 class="text-center">Your current location</h2> 
-                <div class="d-flex align-items-center mb-4">
+                <div class="d-flex justify-content-center mb-4">
                     <img id="flag" src="" alt="Flag of Nigeria" class="flag me-3">
                     <img id="coatofarm" src="" alt="Coat of Arms"
                         class="coat">
@@ -77,6 +79,7 @@
             </div>
             
         </div>
+    </div>
 
         <!-- Flag and Coat of Arms -->
         <div id="card-container" class="row g-4 d-flex justify-content-center"></div>

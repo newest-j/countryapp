@@ -70,7 +70,7 @@ async function fetchCountriesByContinent(continent) {
 
 continentBtn.addEventListener("click", async () => {
   let selected = byContinent.value;
-  
+
 
   if (!selected) {
     alert("Please select a continent");
@@ -79,13 +79,17 @@ continentBtn.addEventListener("click", async () => {
 
   const countries = await fetchCountriesByContinent(selected);
 
-  
-  
+
+  document.getElementById("card-container").innerHTML = "";
 
   countries.forEach((country) => {
     const card = document.createElement("div");
+
+    // Clear previous results
+    byContinent.value = "";
     card.className = "col-md-4";
 
+    card.innerHTML = "";
     card.innerHTML = `
         <div class="card shadow-sm p-4 ">
          <div class="d-flex justify-content-center mb-4">
@@ -108,17 +112,15 @@ continentBtn.addEventListener("click", async () => {
  </div>
       
     `;
-
     document.getElementById("card-container").appendChild(card);
 
   });
 
-  // Clear previous results
-  byContinent.value ="";
+  
 });
 
 
-document.getElementById("clearinfo").addEventListener('click',()=>{
+document.getElementById("clearinfo").addEventListener('click', () => {
   document.getElementById("card-container").innerHTML = "";
 })
 
@@ -243,6 +245,7 @@ searchBtn.addEventListener('click', async () => {
   }
 
   const data = await getCountry(countryName);
+  
 
   try {
 
@@ -255,15 +258,18 @@ searchBtn.addEventListener('click', async () => {
         (country.altSpellings && country.altSpellings.some(alt => alt.toLowerCase() === countryName.toLowerCase()))
       );
 
+      document.getElementById("card-container").innerHTML = "";
+
 
       // if condition is true output
       if (matchedCountry) {
 
         const card = document.createElement("div");
-        card.className = "col-md-4";
+        card.className = "col-md-8";
 
         card.innerHTML = `
         <div class="card shadow-sm p-4 ">
+        <div class="d-flex justify-content-center flex-column text-">
           <div class="d-flex justify-content-center mb-4">
             <img src="${matchedCountry.flags.png}" alt="Flag of ${matchedCountry.name.common}" class="me-3" style="height: 80px;">
             <img src="${matchedCountry.coatOfArms.png || ''}" alt="Coat of Arms" style="height: 80px;">
@@ -280,6 +286,7 @@ searchBtn.addEventListener('click', async () => {
           <p><strong>Google Maps:</strong> <a href="${matchedCountry.maps.googleMaps}" target="_blank">map</a>
           <a href="${matchedCountry.maps.openStreetMaps}" target="_blank">openStreeMap</a>
           </p>
+          </div>
         </div>
       `;
 
@@ -319,6 +326,53 @@ searchBtn.addEventListener('click', async () => {
 
 });
 
+
+
+const suggestionsList = document.getElementById("suggestions");
+
+input.addEventListener('input', async () => {
+  const value = input.value.trim();
+
+  suggestionsList.innerHTML = "";
+
+  if (!value) return;
+
+  try {
+    const response = await fetch(`https://restcountries.com/v3.1/name/${value}`);
+    const data = await response.json();
+
+    // Filter countries
+    const filtered = data.filter(c =>
+      c.name.common.toLowerCase().startsWith(value.toLowerCase())
+    );
+
+    filtered.forEach(country => {
+      const li = document.createElement("li");
+      li.className = "list-group-item list-group-item-action";
+      li.textContent = country.name.common;
+
+      li.addEventListener("click", () => {
+        input.value = country.name.common;
+        suggestionsList.innerHTML = "";
+        searchBtn.click(); 
+      });
+
+      suggestionsList.appendChild(li);
+    });
+
+    return filtered;
+  } catch (error) {
+    console.error("Error fetching countries:", error);
+    return null;
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target !== input) {
+    suggestionsList.innerHTML = "";
+  }
+});
+ 
 
 
 
